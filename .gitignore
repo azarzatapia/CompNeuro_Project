@@ -1,0 +1,72 @@
+# macOS system files
+.DS_Store
+._*
+
+# LaTeX auxiliary files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.bcf
+*.run.xml
+*.thm
+*.glg
+*.glo
+*.gls
+*.ist
+*.brf
+*.acn
+*.acr
+*.alg
+*.loa
+*.mw
+
+# LaTeX Workshop (VS Code) generated files
+**/.latexmk
+**/*.latexmain
+**/*.synctex(busy)
+**/*.synctex.gz(busy)
+**/*-concordance.tex
+
+# VS Code-specific (if not already covered)
+.vscode/*
+!.vscode/extensions.json  # (Optional: keep if you want to share recommended extensions)
+
+# MATLAB generated files
+*.m~
+*.asv
+*.mex*
+*.p
+*.mexmaci64
+*.mexa64
+*.mexmaci
+*.mexmac
+*.mexw32
+*.mexw64
+*.fig
+*.mat
+*.mlappinstall
+*.mltbx
+*.slxc
+*.slx.autosave
+*.slxp
+*.mlapp
+*.mlpkginstall
+simulink/*.slxc
+
+
+# Temporary files
+*~
+*.tmp
+*.bak
