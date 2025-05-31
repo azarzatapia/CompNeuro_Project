@@ -23,13 +23,13 @@ C = 1;
 
 % I Leak
 
-g_L = 0.05;
-V_L = -70;
+g_L = 0.05; % mS.cm−2
+V_L = -70; % mV
 
 % I Na
 
-g_Na = 24;
-V_Na = 50;
+g_Na = 20; % mS.cm−2
+V_Na = 55; % mV
 
 % I K
 
