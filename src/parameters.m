@@ -13,7 +13,7 @@ I_AFTER = 0;
 
 % Parameters to Play with
 
-I_TONIC = 0.6;
+I_TONIC = 1.1;
 wei = 2.2;
 wie = 3;
 
