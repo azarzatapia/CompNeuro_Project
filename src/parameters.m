@@ -13,9 +13,9 @@ I_AFTER = 0;
 
 % Parameters to Play with
 
-I_TONIC = 1;
-wei = 1.5;
-wie = 1;
+I_TONIC = 0.6;
+wei = 2.2;
+wie = 3;
 
 % Membrane Capacitance
 

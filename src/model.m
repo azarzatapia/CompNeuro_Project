@@ -64,7 +64,7 @@ for k = 2:n_t
     I_GABAb_IE(k) = g_GABAb * wie * p_GABAb_IE(k-1) * (Ve(k-1) - V_GABAb);
 
     % Total current for E neuron
-    I_total_E = I_inj(k) - I_Le(k) - I_Nae(k) - I_Ke(k) + I_GABAa_IE(k) + I_GABAb_IE(k);
+    I_total_E = I_inj(k) - I_Le(k) - I_Nae(k) - I_Ke(k) - I_GABAa_IE(k) - I_GABAb_IE(k);
     Ve(k) = Ve(k-1) + (dt/C) * I_total_E;
 
     % Leak current
@@ -89,7 +89,7 @@ for k = 2:n_t
     I_NMDA_EI(k) = g_NMDA * wei * p_NMDA_EI(k-1) * x_NMDA * (Vi(k-1) - V_NMDA);
 
     % Total current for I neuron
-    I_total_I = -I_Li(k) - I_Nai(k) - I_Ki(k) - I_AMPA_EI(k) - I_NMDA_EI(k);
+    I_total_I = - I_Li(k) - I_Nai(k) - I_Ki(k) - I_AMPA_EI(k) - I_NMDA_EI(k);
     Vi(k) = Vi(k-1) + (dt/C) * I_total_I;
 
     E_spikes(k) = (Ve(k-1) < 0 && Ve(k) >= 0);
@@ -123,12 +123,12 @@ title('E-I Network Dynamics');
 legend('Excitatory (E)', 'Inhibitory (I)');
 grid on;
 
-figure;
-plot(T, I_NMDA_EI, 'g'); hold on;  % Excitatory (E→I, negative = depolarizing)
-plot(T, I_AMPA_EI, 'r');          % Inhibitory (I→E, positive = hyperpolarizing)
-legend('NMDA (E->I)','AMPA (E->I)');
+% figure;
+% plot(T, I_NMDA_EI, 'g'); hold on;  % Excitatory (E→I, negative = depolarizing)
+% plot(T, I_AMPA_EI, 'r');          % Inhibitory (I→E, positive = hyperpolarizing)
+% legend('NMDA (E->I)','AMPA (E->I)');
 
-figure;
-plot(T, I_GABAb_IE, 'g'); hold on;  % Excitatory (E→I, negative = depolarizing)
-plot(T, I_GABAa_IE, 'r');          % Inhibitory (I→E, positive = hyperpolarizing)
-legend('GABAb (E->I)','GABAa (E->I)');
+% figure;
+% plot(T, I_GABAb_IE, 'g'); hold on;  % Excitatory (E→I, negative = depolarizing)
+% plot(T, I_GABAa_IE, 'r');          % Inhibitory (I→E, positive = hyperpolarizing)
+% legend('GABAb (E->I)','GABAa (E->I)');
