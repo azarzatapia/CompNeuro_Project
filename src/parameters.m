@@ -1,79 +1,93 @@
 % Time step
 
-dt = 0.025; % ms
+dt = 0.0025; % ms
 
 % Current Injection Protocol [ms]
 
-dt_BEFORE = 200;
+dt_BEFORE = 100;
 dt_TONIC = 1000;
-dt_AFTER = 200;
+dt_AFTER = 300;
 
-I_BEFORE = 0;
 I_AFTER = 0;
-
-% Parameters to Play with
-
-I_TONIC = 1.1;
-wei = 2.2;
-wie = 3;
+I_BEFORE = 0;
 
 % Membrane Capacitance
 
 C = 1;
 
-% I Leak
+% ---------------- EXCITATORY NEURON PARAMETERS (Pyramidal Neuron) ---------------- %
 
-g_L = 0.05; % mS.cm−2
-V_L = -70; % mV
+% E Threshold Potential
+Vte = -56.2;
 
-% I Na
+% E Leakage
+ge_L = 0.05; % mS.cm-2
+Ve_L = -70; % mV
 
-g_Na = 20; % mS.cm−2
-V_Na = 55; % mV
+% E Na --------
 
-% I K
+ge_Na = 24; % mS.cm-2
+Ve_Na = 50; % mV
 
-g_K = 3;
-V_K = -90;
+% E K --------
 
-% Factors important to specific receptors
+ge_K = 3; % mS.cm-2
+Ve_K = -90; % mV
 
+% ---------------- INHIBITORY NEURON PARAMETERS (Interneuron) ---------------- %
+
+% IThreshold Potential
+Vti = -67.9;
+
+gi_L = 0.05; % mS.cm-2
+Vi_L = -70; % mV
+
+% I Na --------
+
+gi_Na = 24; % mS.cm-2
+Vi_Na = 50; % mV
+
+% I K --------
+
+gi_K = 3; % mS.cm-2
+Vi_K = -90; % mV
+
+% ---------------- NEUROTRANSMITTERS ---------------- %
+% times faster than closing
 rise_decay_factor = 0.1;
-V_Star = V_L + I_TONIC/g_L;
 
-% I AMPA
+% Transmitter release (if you want to customize later)
+tau_release = 0.3;   % ms
+A_release = 1.0; % Concentration of Neurotransmitter
 
-V_AMPA = 0;
-tau_AMPA = 2.5;
-alpha_AMPA = rise_decay_factor/tau_AMPA;
-beta_AMPA = 1/tau_AMPA;
+% AMPA
+AMPA_tau    = 2.5;
+AMPA_alpha  = rise_decay_factor / AMPA_tau;
+AMPA_beta   = 1 / AMPA_tau;
+AMPA_Erev   = 0;
+AMPA_g      = 5;   % Total for ~1000 synapses
 
-% I NMDA
+% NMDA
+NMDA_tau    = 50;
+NMDA_alpha  = rise_decay_factor / NMDA_tau;
+NMDA_beta   = 1 / NMDA_tau;
+NMDA_Erev   = 0;
+NMDA_g      = 5;
 
-V_NMDA = 0;
-tau_NMDA = 10;
-alpha_NMDA = rise_decay_factor/tau_NMDA;
-beta_NMDA = 1/tau_NMDA;
+% GABAa
+GABAa_tau   = 10;
+GABAa_alpha = rise_decay_factor / GABAa_tau;
+GABAa_beta  = 1 / GABAa_tau;
+GABAa_Erev  = -60;
+GABAa_g     = 30;
 
-% I GABAa
+% GABAb 
+GABAb_tau   = 150;
+GABAb_alpha = rise_decay_factor / GABAb_tau;
+GABAb_beta  = 1 / GABAb_tau;
+GABAb_Erev  = -90;
+GABAb_g     = 5;
 
-V_GABAa = -60;
-tau_GABAa = 50;
-alpha_GABAa = rise_decay_factor/tau_GABAa;
-beta_GABAa = 1/tau_GABAa;
-
-% I GABAb
-
-V_GABAb = -90;
-tau_GABAb = 150;
-alpha_GABAb = rise_decay_factor/tau_GABAb;
-beta_GABAb = 1/tau_GABAb;
-
-% Conductances for receptors
-
-g_Scale = 50;
-g_AMPA = g_Scale / abs(V_Star - V_AMPA);
-x_NMDA_rest = 1/(1 + 0.42*exp(-0.062*V_Star));
-g_NMDA = g_Scale / (x_NMDA_rest * abs(V_Star - V_NMDA));
-g_GABAa = g_Scale / abs(V_Star - V_GABAa);
-g_GABAb = g_Scale / abs(V_Star - V_GABAb);
+% --- Stochastic GABA Parameters ---
+n_GABA_spikes = 5; 
+GABA_delay_range = 200;% ms
